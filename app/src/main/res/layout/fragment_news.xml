@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".NewsFragment"
     android:orientation="vertical"
-    android:background="@color/layout_background">
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
