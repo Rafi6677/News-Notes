@@ -2,6 +2,7 @@ package com.example.newsnotes.data.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Article(
 
@@ -22,4 +23,4 @@ data class Article(
     @SerializedName("urlToImage")
     val urlToImage: String
 
-)
+): Serializable

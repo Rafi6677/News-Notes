@@ -28,6 +28,10 @@
         android:id="@+id/newsDetailsFragment"
         android:name="com.example.newsnotes.NewsDetailsFragment"
         android:label="fragment_news_details"
-        tools:layout="@layout/fragment_news_details" />
+        tools:layout="@layout/fragment_news_details" >
+        <argument
+            android:name="selected_article"
+            app:argType="com.example.newsnotes.data.model.Article" />
+    </fragment>
 
 </navigation>

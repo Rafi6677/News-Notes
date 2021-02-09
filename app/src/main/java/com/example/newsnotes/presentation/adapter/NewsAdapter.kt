@@ -11,6 +11,8 @@ import com.example.newsnotes.databinding.NewsListItemBinding
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
+    private var onItemClickListener: ((Article)->Unit)? = null
+
     private val callback = object: DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
@@ -42,6 +44,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         return differ.currentList.size
     }
 
+    fun setOnItemClickListener(listener: (Article)->Unit) {
+        onItemClickListener = listener
+    }
+
     inner class NewsViewHolder(
         val binding: NewsListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -55,6 +61,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             Glide.with(binding.ivArticleImage.context)
                 .load(article.urlToImage)
                 .into(binding.ivArticleImage)
+
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(article)
+                }
+            }
         }
 
     }
