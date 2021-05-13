@@ -19,4 +19,5 @@
     <color name="item_text">#F3F5F7</color>
     <color name="item_background">#474747</color>
     <color name="background">#333333</color>
+    <color name="search_background">#3E3B3B</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.newsnotes.presentation.di
+package com.example.newsnotes.di
 
 import com.example.newsnotes.presentation.adapter.NewsAdapter
 import dagger.Module

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,9 @@ import com.example.newsnotes.data.util.Resource
 import com.example.newsnotes.databinding.FragmentNewsBinding
 import com.example.newsnotes.presentation.adapter.NewsAdapter
 import com.example.newsnotes.presentation.viewmodel.NewsViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment() {
 
@@ -56,6 +60,7 @@ class NewsFragment : Fragment() {
 
         initRecyclerView()
         displayNewsList()
+        setSearchView()
     }
 
     private fun initRecyclerView() {
@@ -69,6 +74,67 @@ class NewsFragment : Fragment() {
     private fun displayNewsList() {
         viewModel.getNewsHeadlines(country, page)
         viewModel.newsHeadlines.observe(viewLifecycleOwner, { response ->
+            when(response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let {
+                        newsAdapter.differ.submitList(it.articles.toList())
+
+                        if (it.totalResults % 20 == 0) {
+                            pages = it.totalResults / 20
+                        } else {
+                            pages = it.totalResults / 20 + 1
+                        }
+
+                        isLastPage = page == pages
+                    }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let {
+                        Toast.makeText(
+                            activity,
+                            "Wystąpił problem podczas pobierania danych: $it",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
+    }
+
+    private fun setSearchView() {
+        fragmentNewsBinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.searchNews("pl", query.toString(), page)
+                displaySearchedNews()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                MainScope().launch {
+                    delay(2000)
+                    viewModel.searchNews("pl", newText.toString(), page)
+                    displaySearchedNews()
+                }
+                return false
+            }
+        })
+
+        fragmentNewsBinding.searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                initRecyclerView()
+                displayNewsList()
+                return false
+            }
+        })
+    }
+
+    fun displaySearchedNews() {
+        viewModel.searchedNews.observe(viewLifecycleOwner, { response ->
             when(response) {
                 is Resource.Success -> {
                     hideProgressBar()

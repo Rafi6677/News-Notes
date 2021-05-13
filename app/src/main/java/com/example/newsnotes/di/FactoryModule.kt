@@ -1,13 +1,13 @@
-package com.example.newsnotes.presentation.di
+package com.example.newsnotes.di
 
 import android.app.Application
 import com.example.newsnotes.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.newsnotes.domain.usecase.GetSearchedNewsUseCase
 import com.example.newsnotes.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import javax.inject.Singleton
 
 @Module
@@ -18,11 +18,13 @@ class FactoryModule {
     @Provides
     fun provideNewsViewModel(
         application: Application,
-        getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+        getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+        getSearchedNewsUseCase: GetSearchedNewsUseCase
     ): NewsViewModelFactory {
         return NewsViewModelFactory(
             application,
-            getNewsHeadlinesUseCase
+            getNewsHeadlinesUseCase,
+            getSearchedNewsUseCase
         )
     }
 

@@ -10,4 +10,10 @@ interface NewsRemoteDataSource {
         page: Int
     ): Response<APIResponse>
 
+    suspend fun getSearchedTopHeadlines(
+        country: String,
+        searchedQuery: String,
+        page: Int
+    ): Response<APIResponse>
+
 }
