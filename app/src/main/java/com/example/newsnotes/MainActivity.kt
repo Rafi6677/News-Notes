@@ -3,14 +3,13 @@ package com.example.newsnotes
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsnotes.databinding.ActivityMainBinding
 import com.example.newsnotes.presentation.adapter.NewsAdapter
 import com.example.newsnotes.presentation.viewmodel.NewsViewModel
 import com.example.newsnotes.presentation.viewmodel.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,8 +29,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
         binding.bottomNavigation.setupWithNavController(
-            fragment.findNavController()
+            navController
         )
 
         viewModel = ViewModelProvider(this, factory)
