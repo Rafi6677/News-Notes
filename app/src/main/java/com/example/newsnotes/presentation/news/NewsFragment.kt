@@ -1,4 +1,4 @@
-package com.example.newsnotes
+package com.example.newsnotes.presentation.news
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newsnotes.R
 import com.example.newsnotes.data.util.Resource
 import com.example.newsnotes.databinding.FragmentNewsBinding
-import com.example.newsnotes.presentation.adapter.NewsAdapter
-import com.example.newsnotes.presentation.viewmodel.NewsViewModel
+import com.example.newsnotes.presentation.MainActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

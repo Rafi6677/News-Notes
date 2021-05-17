@@ -1,10 +1,7 @@
 package com.example.newsnotes.di
 
 import com.example.newsnotes.domain.repository.NewsRepository
-import com.example.newsnotes.domain.usecase.GetNewsHeadlinesUseCase
-import com.example.newsnotes.domain.usecase.GetSavedNewsUseCase
-import com.example.newsnotes.domain.usecase.GetSearchedNewsUseCase
-import com.example.newsnotes.domain.usecase.SaveNewsUseCase
+import com.example.newsnotes.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +42,14 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetSavedNewsUseCase {
         return GetSavedNewsUseCase(newsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDeleteSavedNewsUseCase(
+        newsRepository: NewsRepository
+    ): DeleteSaveNewsUseCase {
+        return DeleteSaveNewsUseCase(newsRepository)
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.newsnotes.di
 
-import com.example.newsnotes.presentation.adapter.NewsAdapter
+import com.example.newsnotes.presentation.news.NewsAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

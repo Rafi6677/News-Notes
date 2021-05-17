@@ -1,4 +1,4 @@
-package com.example.newsnotes.presentation.viewmodel
+package com.example.newsnotes.presentation.news
 
 import android.app.Application
 import android.content.Context
@@ -9,10 +9,7 @@ import androidx.lifecycle.*
 import com.example.newsnotes.data.model.APIResponse
 import com.example.newsnotes.data.model.Article
 import com.example.newsnotes.data.util.Resource
-import com.example.newsnotes.domain.usecase.GetNewsHeadlinesUseCase
-import com.example.newsnotes.domain.usecase.GetSavedNewsUseCase
-import com.example.newsnotes.domain.usecase.GetSearchedNewsUseCase
-import com.example.newsnotes.domain.usecase.SaveNewsUseCase
+import com.example.newsnotes.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,7 +20,8 @@ class NewsViewModel(
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
     private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
     private val saveNewsUseCase: SaveNewsUseCase,
-    private val getSavedNewsUseCase: GetSavedNewsUseCase
+    private val getSavedNewsUseCase: GetSavedNewsUseCase,
+    private val deleteSaveNewsUseCase: DeleteSaveNewsUseCase
 ) : AndroidViewModel(app) {
 
     private fun isNetworkAvailable(context: Context?): Boolean {
@@ -108,6 +106,10 @@ class NewsViewModel(
         getSavedNewsUseCase.execute().collect {
             emit(it)
         }
+    }
+
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+
     }
 
 }

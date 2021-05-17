@@ -1,11 +1,8 @@
 package com.example.newsnotes.di
 
 import android.app.Application
-import com.example.newsnotes.domain.usecase.GetNewsHeadlinesUseCase
-import com.example.newsnotes.domain.usecase.GetSavedNewsUseCase
-import com.example.newsnotes.domain.usecase.GetSearchedNewsUseCase
-import com.example.newsnotes.domain.usecase.SaveNewsUseCase
-import com.example.newsnotes.presentation.viewmodel.NewsViewModelFactory
+import com.example.newsnotes.domain.usecase.*
+import com.example.newsnotes.presentation.news.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,14 +20,16 @@ class FactoryModule {
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase: GetSearchedNewsUseCase,
         saveNewsUseCase: SaveNewsUseCase,
-        getSavedNewsUseCase: GetSavedNewsUseCase
+        getSavedNewsUseCase: GetSavedNewsUseCase,
+        deleteSaveNewsUseCase: DeleteSaveNewsUseCase
     ): NewsViewModelFactory {
         return NewsViewModelFactory(
             application,
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
             saveNewsUseCase,
-            getSavedNewsUseCase
+            getSavedNewsUseCase,
+            deleteSaveNewsUseCase
         )
     }
 

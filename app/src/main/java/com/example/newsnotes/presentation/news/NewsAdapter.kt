@@ -1,4 +1,4 @@
-package com.example.newsnotes.presentation.adapter
+package com.example.newsnotes.presentation.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

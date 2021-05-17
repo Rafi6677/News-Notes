@@ -1,4 +1,4 @@
-package com.example.newsnotes
+package com.example.newsnotes.presentation.newsdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.newsnotes.presentation.MainActivity
+import com.example.newsnotes.R
 import com.example.newsnotes.databinding.FragmentNewsDetailsBinding
-import com.example.newsnotes.presentation.viewmodel.NewsViewModel
+import com.example.newsnotes.presentation.news.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class NewsDetailsFragment : Fragment() {

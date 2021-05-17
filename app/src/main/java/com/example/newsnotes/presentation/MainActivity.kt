@@ -1,14 +1,15 @@
-package com.example.newsnotes
+package com.example.newsnotes.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.newsnotes.R
 import com.example.newsnotes.databinding.ActivityMainBinding
-import com.example.newsnotes.presentation.adapter.NewsAdapter
-import com.example.newsnotes.presentation.viewmodel.NewsViewModel
-import com.example.newsnotes.presentation.viewmodel.NewsViewModelFactory
+import com.example.newsnotes.presentation.news.NewsAdapter
+import com.example.newsnotes.presentation.news.NewsViewModel
+import com.example.newsnotes.presentation.news.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
